@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ua.com.hedgehog.adspublisher.db.JdbcCampaignDAO;
+import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
+import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Ad;
 import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Platform;
@@ -31,7 +33,13 @@ public class JdbcCampaignDAOTest {
 
     @Test
     public void findAll() {
-        List<CampaignInfo> campaigns = campaignDao.findAll();
+        Integer page = null;
+        Integer size = null;
+        SortCampaign sortBy = null;
+        SortDirection sortDir = null;
+        String name = null;
+        Status status = null;
+        List<CampaignInfo> campaigns = campaignDao.findAll(page, size, sortBy, sortDir, name, status);
         assertThat(campaigns.size()).isEqualTo(2);
     }
 

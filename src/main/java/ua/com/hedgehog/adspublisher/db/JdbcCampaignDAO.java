@@ -9,7 +9,10 @@ import ua.com.hedgehog.adspublisher.db.query.DeleteCampaign;
 import ua.com.hedgehog.adspublisher.db.query.InsertCampaign;
 import ua.com.hedgehog.adspublisher.db.query.SelectCampaigns;
 import ua.com.hedgehog.adspublisher.db.query.UpdateCampaign;
+import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
+import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Campaign;
+import ua.com.hedgehog.adspublisher.model.Status;
 import ua.com.hedgehog.adspublisher.service.CampaignInfo;
 
 import javax.annotation.Resource;
@@ -42,8 +45,8 @@ public class JdbcCampaignDAO implements CampaignDAO {
     }
 
     @Override
-    public List<CampaignInfo> findAll() {
-        return select.findAllInfo();
+    public List<CampaignInfo> findAll(Integer page, Integer size, SortCampaign sortBy, SortDirection sortDir, String name, Status status) {
+        return select.findAllInfo(page, size, sortBy, sortDir, name, status);
     }
 
     @Override

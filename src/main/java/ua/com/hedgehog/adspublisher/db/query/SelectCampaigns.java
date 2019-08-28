@@ -1,7 +1,11 @@
 package ua.com.hedgehog.adspublisher.db.query;
 
+import com.google.common.base.Strings;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ua.com.hedgehog.adspublisher.db.util.SQLQueryBuilder;
+import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
+import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Ad;
 import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Platform;
@@ -14,6 +18,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class SelectCampaigns {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -22,11 +27,16 @@ public class SelectCampaigns {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public List<CampaignInfo> findAllInfo() {
-        String sql = "select c.id, c.name, c.status, count(ac.ads_id) ads from campaigns c " +
-                "left join ads_campaigns ac on c.id = ac.campaign_id  " +
-                "group by c.id";
-        return namedParameterJdbcTemplate.query(sql, (rs, row) -> {
+    public List<CampaignInfo> findAllInfo(Integer page, Integer size, SortCampaign sortBy, SortDirection sortDir, String nameFilter, Status statusFilter) {
+        SQLQueryBuilder builder = new SQLQueryBuilder("select c.id, c.name, c.status, count(ac.ads_id) ads from campaigns c " +
+                "left join ads_campaigns ac on c.id = ac.campaign_id");
+        builder.groupBy("c.id");
+        builder.limit(size);
+        builder.offset(Objects.nonNull(page) && Objects.nonNull(size) ? page * size : null);
+        builder.orderBy(sortBy == null ? null : sortBy.getQuery(), sortDir);
+        builder.addCondition(Strings.isNullOrEmpty(nameFilter) ? null : " c.name='" + nameFilter + "'");
+        builder.addCondition(statusFilter == null ? null : " c.status=" + statusFilter.ordinal());
+        return namedParameterJdbcTemplate.query(builder.toString(), (rs, row) -> {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             Status status = Status.byId(rs.getInt("status"));
