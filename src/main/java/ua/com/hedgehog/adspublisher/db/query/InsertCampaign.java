@@ -7,8 +7,7 @@ import javax.sql.DataSource;
 import java.sql.Types;
 
 public class InsertCampaign extends SqlUpdate {
-    private static final String SQL_INSERT_CAMPAIGN =
-            "insert into campaigns (name, status, start_date, end_date) values (:name, :status, :start_date, :end_date);";
+    private static final String SQL_INSERT_CAMPAIGN = "insert into campaigns (name, status, start_date, end_date) values (:name, :status, :start_date, :end_date)";
 
     public InsertCampaign(DataSource dataSource) {
         super(dataSource, SQL_INSERT_CAMPAIGN);

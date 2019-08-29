@@ -58,7 +58,7 @@ create table ads_campaigns
     ads_id      int,
     campaign_id int,
     primary key (ads_id, campaign_id),
-    foreign key (ads_id) references ads (id),
+    foreign key (ads_id) references ads (id) on delete cascade,
     foreign key (campaign_id) references campaigns (id)
 );
 
@@ -67,6 +67,6 @@ create table ads_platforms
     ads_id      int,
     platform_id int,
     primary key (ads_id, platform_id),
-    foreign key (ads_id) references ads (id),
+    foreign key (ads_id) references ads (id) on delete cascade,
     foreign key (platform_id) references platforms (id)
 );

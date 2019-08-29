@@ -18,6 +18,4 @@ public interface CampaignDAO {
     void delete(int campaignId);
 
     Campaign find(int campaignId);
-
-    void insertWithAds(Campaign campaign);
 }
