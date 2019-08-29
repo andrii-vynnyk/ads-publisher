@@ -2,6 +2,8 @@ package ua.com.hedgehog.adspublisher.model;
 
 import java.net.URL;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Ad {
     private int id;
@@ -9,6 +11,7 @@ public class Ad {
     private Status status;
     private EnumSet<Platform> platforms;
     private URL assetUrl;
+    private Set<Integer> campaigns = new HashSet<>();
 
     public int getId() {
         return id;
@@ -58,5 +61,17 @@ public class Ad {
 
     public void setAssetUrl(URL assetUrl) {
         this.assetUrl = assetUrl;
+    }
+
+    public Set<Integer> getCampaigns() {
+        return campaigns;
+    }
+
+    public void addCampaign(Integer campaignId) {
+        campaigns.add(campaignId);
+    }
+
+    public void removeCampaign(Integer campaignId) {
+        campaigns.remove(campaignId);
     }
 }

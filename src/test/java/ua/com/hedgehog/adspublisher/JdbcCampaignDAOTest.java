@@ -134,10 +134,11 @@ public class JdbcCampaignDAOTest {
         assertThat(campaign.getEndDate()).isEqualTo(update_test.getEndDate());
 
         Campaign delete_test = new Campaign();
-        campaignDao.delete(insert_test.getId());
+        delete_test.setId(insert_test.getId());
+        campaignDao.delete(delete_test.getId());
 
         //check
-        assertThatExceptionOfType(CampaignNotFoundException.class).isThrownBy(() -> campaignDao.find(update_test.getId()));
+        assertThatExceptionOfType(CampaignNotFoundException.class).isThrownBy(() -> campaignDao.find(delete_test.getId()));
     }
 
     @Test(expected = CampaignNotFoundException.class)

@@ -7,8 +7,7 @@ import javax.sql.DataSource;
 import java.sql.Types;
 
 public class UpdateCampaign extends SqlUpdate {
-    private static final String SQL_UPDATE_CAMPAIGN =
-            "update campaigns set name = :name, status = :status, start_date = :start_date, end_date = :end_date where id = :id";
+    private static final String SQL_UPDATE_CAMPAIGN = "update campaigns set name = :name, status = :status, start_date = :start_date, end_date = :end_date where id = :id";
 
     public UpdateCampaign(DataSource dataSource) {
         super(dataSource, SQL_UPDATE_CAMPAIGN);

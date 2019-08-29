@@ -24,7 +24,6 @@ import java.util.Map;
 @Slf4j
 @Repository("campaignDao")
 public class JdbcCampaignDAO implements CampaignDAO {
-    private DataSource dataSource;
     private SelectCampaigns select;
     private InsertCampaign insert;
     private UpdateCampaign update;
@@ -32,16 +31,10 @@ public class JdbcCampaignDAO implements CampaignDAO {
 
     @Resource(name = "dataSource")
     public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-        final NamedParameterJdbcTemplate jJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-        select = new SelectCampaigns(jJdbcTemplate);
+        select = new SelectCampaigns(new NamedParameterJdbcTemplate(dataSource));
         insert = new InsertCampaign(dataSource);
         update = new UpdateCampaign(dataSource);
         delete = new DeleteCampaign(dataSource);
-    }
-
-    public DataSource getDataSource() {
-        return dataSource;
     }
 
     @Override
@@ -85,10 +78,5 @@ public class JdbcCampaignDAO implements CampaignDAO {
     @Override
     public Campaign find(int campaignId) {
         return select.find(campaignId);
-    }
-
-    @Override
-    public void insertWithAds(Campaign campaign) {
-
     }
 }

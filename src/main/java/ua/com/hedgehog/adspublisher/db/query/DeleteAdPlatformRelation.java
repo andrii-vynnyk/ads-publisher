@@ -6,11 +6,11 @@ import org.springframework.jdbc.object.SqlUpdate;
 import javax.sql.DataSource;
 import java.sql.Types;
 
-public class DeleteCampaign extends SqlUpdate {
-    private static final String SQL_DELETE_CAMPAIGN = "delete from campaigns where id = :id";
+public class DeleteAdPlatformRelation extends SqlUpdate {
+    private static final String SQL_DELETE_RELATION = "delete from ads_platforms where ads_id = :id";
 
-    public DeleteCampaign(DataSource dataSource) {
-        super(dataSource, SQL_DELETE_CAMPAIGN);
+    public DeleteAdPlatformRelation(DataSource dataSource) {
+        super(dataSource, SQL_DELETE_RELATION);
         super.declareParameter(new SqlParameter("id", Types.INTEGER));
     }
 }
