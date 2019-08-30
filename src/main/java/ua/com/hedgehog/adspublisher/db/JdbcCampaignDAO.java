@@ -1,6 +1,13 @@
 package ua.com.hedgehog.adspublisher.db;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -13,17 +20,12 @@ import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
 import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Status;
-import ua.com.hedgehog.adspublisher.service.CampaignInfo;
+import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-@Slf4j
 @Repository("campaignDao")
 public class JdbcCampaignDAO implements CampaignDAO {
+    private final static Logger log = LoggerFactory.getLogger(JdbcCampaignDAO.class);
+
     private SelectCampaigns select;
     private InsertCampaign insert;
     private UpdateCampaign update;
@@ -44,11 +46,7 @@ public class JdbcCampaignDAO implements CampaignDAO {
 
     @Override
     public void insert(Campaign campaign) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", campaign.getName());
-        paramMap.put("status", campaign.getStatus().ordinal());
-        paramMap.put("start_date", campaign.getStartDate());
-        paramMap.put("end_date", campaign.getEndDate());
+        Map<String, Object> paramMap = getParamMap(campaign);
         KeyHolder keyHolder = new GeneratedKeyHolder();
         insert.updateByNamedParam(paramMap, keyHolder);
         campaign.setId(keyHolder.getKey().intValue());
@@ -57,11 +55,7 @@ public class JdbcCampaignDAO implements CampaignDAO {
 
     @Override
     public void update(Campaign campaign) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", campaign.getName());
-        paramMap.put("status", campaign.getStatus().ordinal());
-        paramMap.put("start_date", campaign.getStartDate());
-        paramMap.put("end_date", campaign.getEndDate());
+        Map<String, Object> paramMap = getParamMap(campaign);
         paramMap.put("id", campaign.getId());
         update.updateByNamedParam(paramMap);
         log.debug("Existing campaign updated with id: " + campaign.getId());
@@ -78,5 +72,14 @@ public class JdbcCampaignDAO implements CampaignDAO {
     @Override
     public Campaign find(int campaignId) {
         return select.find(campaignId);
+    }
+
+    private Map<String, Object> getParamMap(Campaign campaign) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", campaign.getName());
+        paramMap.put("status", campaign.getStatus().ordinal());
+        paramMap.put("start_date", campaign.getStartDate());
+        paramMap.put("end_date", campaign.getEndDate());
+        return paramMap;
     }
 }

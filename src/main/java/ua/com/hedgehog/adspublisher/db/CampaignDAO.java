@@ -4,7 +4,7 @@ import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
 import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Status;
-import ua.com.hedgehog.adspublisher.service.CampaignInfo;
+import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
 
 import java.util.List;
 

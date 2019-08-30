@@ -1,6 +1,12 @@
 package ua.com.hedgehog.adspublisher.db;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -10,14 +16,10 @@ import ua.com.hedgehog.adspublisher.db.query.*;
 import ua.com.hedgehog.adspublisher.model.Ad;
 import ua.com.hedgehog.adspublisher.model.Platform;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
-
-@Slf4j
 @Repository("adDao")
 public class JdbcAdDAO implements AdDAO {
+    private final static Logger log = LoggerFactory.getLogger(JdbcAdDAO.class);
+
     private SelectAd select;
     private InsertAd insert;
     private UpdateAd update;

@@ -1,5 +1,8 @@
 package ua.com.hedgehog.adspublisher;
 
+import java.util.Collections;
+
+import com.google.common.collect.Sets;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -9,8 +12,6 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Collections;
 
 @EnableSwagger2
 @Configuration
@@ -23,7 +24,10 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("ua.com.hedgehog.adspublisher.rest"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo());
+                .apiInfo(apiInfo())
+                .produces(Sets.newHashSet("application/json"))
+                .consumes(Sets.newHashSet("application/json"))
+                .useDefaultResponseMessages(false);
     }
 
     private ApiInfo apiInfo() {

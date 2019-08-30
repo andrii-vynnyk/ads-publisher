@@ -11,7 +11,7 @@ import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Platform;
 import ua.com.hedgehog.adspublisher.model.Status;
 import ua.com.hedgehog.adspublisher.rest.exception.CampaignNotFoundException;
-import ua.com.hedgehog.adspublisher.service.CampaignInfo;
+import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
 
 import java.net.MalformedURLException;
 import java.net.URL;
