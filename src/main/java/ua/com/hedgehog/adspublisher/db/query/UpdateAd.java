@@ -1,10 +1,10 @@
 package ua.com.hedgehog.adspublisher.db.query;
 
+import java.sql.Types;
+import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.SqlUpdate;
-
-import javax.sql.DataSource;
-import java.sql.Types;
 
 public class UpdateAd extends SqlUpdate {
     private static final String SQL_UPDATE_AD = "update ads set name = :name, status = :status, asset_url = :asset_url where id = :id";

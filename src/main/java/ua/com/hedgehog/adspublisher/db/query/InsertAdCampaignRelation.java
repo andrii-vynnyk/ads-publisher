@@ -1,10 +1,10 @@
 package ua.com.hedgehog.adspublisher.db.query;
 
+import java.sql.Types;
+import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.SqlUpdate;
-
-import javax.sql.DataSource;
-import java.sql.Types;
 
 public class InsertAdCampaignRelation extends SqlUpdate {
     private static final String SQL_INSERT_RELATION = "insert into ads_campaigns (ads_id, campaign_id) values (:ads_id, :campaign_id)";

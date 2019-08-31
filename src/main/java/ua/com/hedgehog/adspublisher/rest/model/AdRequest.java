@@ -23,7 +23,7 @@ public class AdRequest {
     @ApiModelProperty("Ad platforms")
     @NotEmpty(message = "Set platform of ad")
     private EnumSet<Platform> platforms = EnumSet.noneOf(Platform.class);
-    @ApiModelProperty("Ad asset url")
+    @ApiModelProperty(value = "Ad asset url", example = "http://site.com")
     @NotBlank(message = "Set asset url of ad")
     private String assetUrl;
     @ApiModelProperty("Ad campaigns")

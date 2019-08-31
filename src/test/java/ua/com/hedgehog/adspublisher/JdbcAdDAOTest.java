@@ -1,5 +1,11 @@
 package ua.com.hedgehog.adspublisher;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +16,6 @@ import ua.com.hedgehog.adspublisher.model.Ad;
 import ua.com.hedgehog.adspublisher.model.Platform;
 import ua.com.hedgehog.adspublisher.model.Status;
 import ua.com.hedgehog.adspublisher.rest.exception.AdNotFoundException;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

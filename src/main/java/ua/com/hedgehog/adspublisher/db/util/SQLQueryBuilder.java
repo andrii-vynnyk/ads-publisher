@@ -1,11 +1,11 @@
 package ua.com.hedgehog.adspublisher.db.util;
 
-import com.google.common.base.Strings;
-import org.springframework.lang.Nullable;
-
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.google.common.base.Strings;
+import org.springframework.lang.Nullable;
 
 public class SQLQueryBuilder {
     private StringBuilder query = new StringBuilder();

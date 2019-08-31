@@ -1,10 +1,10 @@
 package ua.com.hedgehog.adspublisher.db.query;
 
+import java.sql.Types;
+import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.SqlUpdate;
-
-import javax.sql.DataSource;
-import java.sql.Types;
 
 public class InsertAd extends SqlUpdate {
     private static final String SQL_INSERT_AD = "insert into ads (name, status, asset_url) values (:name, :status, :asset_url)";

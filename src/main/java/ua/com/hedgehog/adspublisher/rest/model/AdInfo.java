@@ -20,7 +20,7 @@ public class AdInfo {
     private final Status status;
     @ApiModelProperty("Ad platforms")
     private final EnumSet<Platform> platforms = EnumSet.noneOf(Platform.class);
-    @ApiModelProperty("Ad asset url")
+    @ApiModelProperty(value = "Ad asset url", example = "http://site.com")
     private final String assetUrl;
     @ApiModelProperty("Ad campaigns")
     private final Set<Integer> campaigns = new HashSet<>();

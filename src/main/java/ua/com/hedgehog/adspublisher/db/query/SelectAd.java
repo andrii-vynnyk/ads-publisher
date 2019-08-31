@@ -1,14 +1,14 @@
 package ua.com.hedgehog.adspublisher.db.query;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ua.com.hedgehog.adspublisher.model.Ad;
 import ua.com.hedgehog.adspublisher.model.Platform;
 import ua.com.hedgehog.adspublisher.model.Status;
 import ua.com.hedgehog.adspublisher.rest.exception.AdNotFoundException;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class SelectAd {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;

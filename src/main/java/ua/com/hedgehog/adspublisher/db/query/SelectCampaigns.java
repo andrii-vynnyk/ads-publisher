@@ -1,5 +1,12 @@
 package ua.com.hedgehog.adspublisher.db.query;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import com.google.common.base.Strings;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,13 +19,6 @@ import ua.com.hedgehog.adspublisher.model.Platform;
 import ua.com.hedgehog.adspublisher.model.Status;
 import ua.com.hedgehog.adspublisher.rest.exception.CampaignNotFoundException;
 import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class SelectCampaigns {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
