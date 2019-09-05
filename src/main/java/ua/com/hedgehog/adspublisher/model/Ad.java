@@ -5,12 +5,22 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("Ad")
 public class Ad {
+    @ApiModelProperty("Ad id")
     private int id;
+    @ApiModelProperty("Ad name")
     private String name;
+    @ApiModelProperty("Ad status")
     private Status status;
+    @ApiModelProperty("Ad platforms")
     private EnumSet<Platform> platforms;
+    @ApiModelProperty(value = "Ad asset url", example = "http://site.com")
     private URL assetUrl;
+    @ApiModelProperty("Ad campaigns")
     private Set<Integer> campaigns = new HashSet<>();
 
     public int getId() {

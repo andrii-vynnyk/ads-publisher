@@ -13,7 +13,6 @@ import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
 import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Status;
-import ua.com.hedgehog.adspublisher.rest.model.CampaignFullInfo;
 import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
 import ua.com.hedgehog.adspublisher.rest.model.CampaignRequest;
 
@@ -55,8 +54,8 @@ public class CampaignsController {
             @ApiResponse(code = 200, message = "Successfully retrieved campaign"),
             @ApiResponse(code = 404, message = "The campaign you were trying to reach is not found")
     })
-    public CampaignFullInfo getCampaign(@PathVariable("id") int id) {
-        return CampaignFullInfo.of(campaignDao.find(id));
+    public Campaign getCampaign(@PathVariable("id") int id) {
+        return campaignDao.find(id);
     }
 
     @PostMapping("/campaign")
@@ -65,14 +64,14 @@ public class CampaignsController {
             @ApiResponse(code = 200, message = "Successfully inserted campaign"),
             @ApiResponse(code = 400, message = "The input parameters are not valid")
     })
-    public CampaignFullInfo insertCampaign(@ApiParam(name = "body", required = true) @Validated @RequestBody CampaignRequest request) {
+    public Campaign insertCampaign(@ApiParam(name = "body", required = true) @Validated @RequestBody CampaignRequest request) {
         Campaign campaign = new Campaign();
         campaign.setName(request.getName());
         campaign.setStatus(request.getStatus());
         campaign.setStartDate(request.getStartDate());
         campaign.setEndDate(request.getEndDate());
         campaignDao.insert(campaign);
-        return CampaignFullInfo.of(campaign);
+        return campaign;
     }
 
     @PutMapping("campaign/{id}")
@@ -81,7 +80,7 @@ public class CampaignsController {
             @ApiResponse(code = 200, message = "Successfully updated campaign"),
             @ApiResponse(code = 400, message = "The input parameters are not valid")
     })
-    public CampaignFullInfo updateCampaign(@ApiParam(name = "body", required = true) @Validated @RequestBody CampaignRequest request, @PathVariable("id") int id) {
+    public Campaign updateCampaign(@ApiParam(name = "body", required = true) @Validated @RequestBody CampaignRequest request, @PathVariable("id") int id) {
         Campaign campaign = new Campaign();
         campaign.setName(request.getName());
         campaign.setStatus(request.getStatus());
@@ -89,7 +88,7 @@ public class CampaignsController {
         campaign.setEndDate(request.getEndDate());
         campaign.setId(id);
         campaignDao.update(campaign);
-        return CampaignFullInfo.of(campaign);
+        return campaign;
     }
 
     @DeleteMapping("campaign/{id}")

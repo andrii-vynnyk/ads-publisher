@@ -5,12 +5,25 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("Campaign")
 public class Campaign {
+    @ApiModelProperty("Campaign id")
     private int id;
+    @ApiModelProperty("Campaign name")
     private String name;
+    @ApiModelProperty("Campaign status")
     private Status status;
+    @ApiModelProperty(dataType = "java.lang.String", value = "Campaign start date. Date format: \"yyyy-MM-dd HH:mm:ss\"", example = "2019-01-01 00:00:00")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startDate;
+    @ApiModelProperty(dataType = "java.lang.String", value = "Campaign end date. Date format: \"yyyy-MM-dd HH:mm:ss\"", example = "2019-12-31 23:59:59")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
+    @ApiModelProperty("Campaign's ads")
     private Map<Integer, Ad> ads = new HashMap<>();
 
     public int getId() {

@@ -2,7 +2,6 @@ package ua.com.hedgehog.adspublisher.rest.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Status;
 
 @ApiModel("Campaign info")
@@ -21,13 +20,6 @@ public class CampaignInfo {
         this.name = name;
         this.status = status;
         this.ads = adsSize;
-    }
-
-    public CampaignInfo(Campaign campaign) {
-        id = campaign.getId();
-        name = campaign.getName();
-        status = campaign.getStatus();
-        ads = campaign.getAds().size();
     }
 
     public int getId() {

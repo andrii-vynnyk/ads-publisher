@@ -8,14 +8,6 @@ import ua.com.hedgehog.adspublisher.model.Campaign;
 import ua.com.hedgehog.adspublisher.model.Status;
 import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
 
-public interface CampaignDAO {
+public interface CampaignDAO extends EntityDAO<Campaign> {
     List<CampaignInfo> findAll(Integer page, Integer size, SortCampaign sortBy, SortDirection sortDir, String name, Status status);
-
-    void insert(Campaign campaign);
-
-    void update(Campaign campaign);
-
-    void delete(int campaignId);
-
-    Campaign find(int campaignId);
 }

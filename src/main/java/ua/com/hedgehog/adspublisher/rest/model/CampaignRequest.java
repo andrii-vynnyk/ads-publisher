@@ -19,11 +19,11 @@ public class CampaignRequest {
     private Status status;
     @ApiModelProperty(dataType = "java.lang.String", value = "Campaign start date. Date format: \"yyyy-MM-dd HH:mm:ss\"", example = "2019-01-01 00:00:00")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @NotBlank(message = "Start date of campaign can't be null or blank")
+    @NotNull(message = "Start date of campaign can't be null or blank")
     private LocalDateTime startDate;
     @ApiModelProperty(dataType = "java.lang.String", value = "Campaign end date. Date format: \"yyyy-MM-dd HH:mm:ss\"", example = "2019-12-31 23:59:59")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @NotBlank(message = "End date of campaign can't be null or blank")
+    @NotNull(message = "End date of campaign can't be null or blank")
     private LocalDateTime endDate;
 
     public String getName() {
