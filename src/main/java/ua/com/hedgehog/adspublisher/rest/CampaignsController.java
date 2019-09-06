@@ -1,10 +1,8 @@
 package ua.com.hedgehog.adspublisher.rest;
 
-import java.util.List;
-import java.util.Map;
-
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -12,15 +10,20 @@ import ua.com.hedgehog.adspublisher.db.JdbcCampaignDAO;
 import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
 import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Campaign;
+import ua.com.hedgehog.adspublisher.model.CampaignInfo;
+import ua.com.hedgehog.adspublisher.model.CampaignRequest;
 import ua.com.hedgehog.adspublisher.model.Status;
-import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
-import ua.com.hedgehog.adspublisher.rest.model.CampaignRequest;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @Api(tags = "Campaigns")
 public class CampaignsController {
     @Autowired
     private JdbcCampaignDAO campaignDao;
+    @Autowired
+    ConversionService conversionService;
 
     @GetMapping("/summaries")
     @ApiOperation("Method is used to get an infos about all existing campaigns. You can use a pagination, a sorting and a filtering")
@@ -65,11 +68,7 @@ public class CampaignsController {
             @ApiResponse(code = 400, message = "The input parameters are not valid")
     })
     public Campaign insertCampaign(@ApiParam(name = "body", required = true) @Validated @RequestBody CampaignRequest request) {
-        Campaign campaign = new Campaign();
-        campaign.setName(request.getName());
-        campaign.setStatus(request.getStatus());
-        campaign.setStartDate(request.getStartDate());
-        campaign.setEndDate(request.getEndDate());
+        Campaign campaign = conversionService.convert(request, Campaign.class);
         campaignDao.insert(campaign);
         return campaign;
     }
@@ -81,11 +80,7 @@ public class CampaignsController {
             @ApiResponse(code = 400, message = "The input parameters are not valid")
     })
     public Campaign updateCampaign(@ApiParam(name = "body", required = true) @Validated @RequestBody CampaignRequest request, @PathVariable("id") int id) {
-        Campaign campaign = new Campaign();
-        campaign.setName(request.getName());
-        campaign.setStatus(request.getStatus());
-        campaign.setStartDate(request.getStartDate());
-        campaign.setEndDate(request.getEndDate());
+        Campaign campaign = conversionService.convert(request, Campaign.class);
         campaign.setId(id);
         campaignDao.update(campaign);
         return campaign;

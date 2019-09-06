@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.ConversionService;
 import ua.com.hedgehog.adspublisher.rest.AdRequestConverter;
+import ua.com.hedgehog.adspublisher.rest.CampaignRequestConverter;
 
 @SpringBootApplication
 public class AdsPublisherApp {
@@ -18,7 +19,7 @@ public class AdsPublisherApp {
     @Bean(name = "conversionService")
     public ConversionService getConversionService() {
         ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
-        bean.setConverters(Sets.newHashSet(new AdRequestConverter()));
+        bean.setConverters(Sets.newHashSet(new AdRequestConverter(), new CampaignRequestConverter()));
         bean.afterPropertiesSet();
         return bean.getObject();
     }

@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.com.hedgehog.adspublisher.db.JdbcAdDAO;
 import ua.com.hedgehog.adspublisher.model.Ad;
-import ua.com.hedgehog.adspublisher.rest.model.AdRequest;
+import ua.com.hedgehog.adspublisher.model.AdRequest;
 
 @RestController
 @Api(tags = "Ads")

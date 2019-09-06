@@ -5,7 +5,7 @@ import java.net.URL;
 
 import org.springframework.core.convert.converter.Converter;
 import ua.com.hedgehog.adspublisher.model.Ad;
-import ua.com.hedgehog.adspublisher.rest.model.AdRequest;
+import ua.com.hedgehog.adspublisher.model.AdRequest;
 
 public class AdRequestConverter implements Converter<AdRequest, Ad> {
     @Override
@@ -13,10 +13,7 @@ public class AdRequestConverter implements Converter<AdRequest, Ad> {
         Ad ad = new Ad();
         ad.setName(request.getName());
         ad.setStatus(request.getStatus());
-        try {
-            ad.setAssetUrl(new URL(request.getAssetUrl()));
-        } catch (MalformedURLException ignore) {
-        }
+        ad.setAssetUrl(request.getAssetUrl());
         request.getCampaigns().forEach(ad::addCampaign);
         request.getPlatforms().forEach(ad::addPlatform);
         return ad;

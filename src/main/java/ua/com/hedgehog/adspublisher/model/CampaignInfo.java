@@ -1,10 +1,9 @@
-package ua.com.hedgehog.adspublisher.rest.model;
+package ua.com.hedgehog.adspublisher.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ua.com.hedgehog.adspublisher.model.Status;
 
-@ApiModel("Campaign info")
+@ApiModel("Campaign short info")
 public class CampaignInfo {
     @ApiModelProperty("Campaign id")
     private final int id;

@@ -1,11 +1,5 @@
 package ua.com.hedgehog.adspublisher.db;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,8 +13,14 @@ import ua.com.hedgehog.adspublisher.db.query.UpdateCampaign;
 import ua.com.hedgehog.adspublisher.db.util.SortCampaign;
 import ua.com.hedgehog.adspublisher.db.util.SortDirection;
 import ua.com.hedgehog.adspublisher.model.Campaign;
+import ua.com.hedgehog.adspublisher.model.CampaignInfo;
 import ua.com.hedgehog.adspublisher.model.Status;
-import ua.com.hedgehog.adspublisher.rest.model.CampaignInfo;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository("campaignDao")
 public class JdbcCampaignDAO implements CampaignDAO {
